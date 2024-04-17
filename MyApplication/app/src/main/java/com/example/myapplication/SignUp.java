@@ -49,9 +49,10 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
     private EditText passwordEdit1;
     private EditText passwordEdit2;
     private Button signUpButton;
-    private String selectedDate;
+    private String selectedDate = "";
 
     private ProgressDialog progressDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,7 +143,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
         final String name = nameEditText.getText().toString();
         final String surname = surnameEditText.getText().toString();
         final String email = emailEditText.getText().toString();
-        final String birthdate = birthdayButton.getText().toString();
+        final String birthdate = selectedDate;
         final String phone = phoneNumberEdit.getText().toString();
         final String password1 = passwordEdit1.getText().toString();
         final String password2 = passwordEdit2.getText().toString();
