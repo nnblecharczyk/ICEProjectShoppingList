@@ -2,12 +2,15 @@ package com.example.myapplication;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,13 +18,26 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
-public class SignUp extends AppCompatActivity {
+public class SignUp extends AppCompatActivity implements View.OnClickListener{
 
     private DatePickerDialog datePickerDialog;
     private Button birthdayButton;
@@ -35,6 +51,9 @@ public class SignUp extends AppCompatActivity {
     private Button signUpButton;
     private String selectedDate;
 
+    private ProgressDialog progressDialog;
+
+    private TextView textViewLogin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,23 +67,14 @@ public class SignUp extends AppCompatActivity {
         passwordEdit1 = findViewById(R.id.passwordEdit1);
         passwordEdit2 = findViewById(R.id.passwordEdit2);
         signUpButton = findViewById(R.id.signUpButton);
+        textViewLogin = (TextView) findViewById(R.id.textView);
 
         // Inicjalizacja przycisku birthdayButton
         birthdayButton = findViewById(R.id.birthdateButton);
         initDatePicker();
-
-        signUpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Pobierz dane z pól formularza
-                String name = nameEditText.getText().toString();
-                String surname = surnameEditText.getText().toString();
-                String email = emailEditText.getText().toString();
-                String phoneNumber = phoneNumberEdit.getText().toString();
-                String password1 = passwordEdit1.getText().toString();
-                String password2 = passwordEdit2.getText().toString();
-            }
-        });
+        signUpButton.setOnClickListener(this);
+        textViewLogin.setOnClickListener(this);
+        progressDialog = new ProgressDialog(this);
 
         // Inicjalizacja przycisku moveToLogin przed użyciem
         moveToLogin = findViewById(R.id.goToLogInButton);
@@ -129,5 +139,60 @@ public class SignUp extends AppCompatActivity {
 
     public void openDatePicker(View view) {
         datePickerDialog.show();
+    }
+
+    private void registerUser() {
+        final String name = nameEditText.getText().toString();
+        final String surname = surnameEditText.getText().toString();
+        final String email = emailEditText.getText().toString();
+        final String birthdate = birthdayButton.getText().toString();
+        final String phone = phoneNumberEdit.getText().toString();
+        final String password1 = passwordEdit1.getText().toString();
+        final String password2 = passwordEdit2.getText().toString();
+
+        progressDialog.setMessage("Registering user...");
+        progressDialog.show();
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                Constants.URL_REGISTER,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        progressDialog.dismiss();
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            Toast.makeText(getApplicationContext(), jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressDialog.hide();
+                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("name",name);
+                params.put("surname", surname);
+                params.put("email", email);
+                params.put("password", password1);
+                params.put("birthdate", birthdate);
+                params.put("phone", phone);
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+    @Override
+    public void onClick(View v) {
+        if (v == signUpButton)
+            registerUser();
+        if(v == textViewLogin);
     }
 }
