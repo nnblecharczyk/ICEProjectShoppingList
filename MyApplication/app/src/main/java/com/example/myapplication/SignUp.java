@@ -53,7 +53,6 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
 
     private ProgressDialog progressDialog;
 
-    private TextView textViewLogin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,13 +66,11 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
         passwordEdit1 = findViewById(R.id.passwordEdit1);
         passwordEdit2 = findViewById(R.id.passwordEdit2);
         signUpButton = findViewById(R.id.signUpButton);
-        textViewLogin = (TextView) findViewById(R.id.textView);
 
         // Inicjalizacja przycisku birthdayButton
         birthdayButton = findViewById(R.id.birthdateButton);
         initDatePicker();
         signUpButton.setOnClickListener(this);
-        textViewLogin.setOnClickListener(this);
         progressDialog = new ProgressDialog(this);
 
         // Inicjalizacja przycisku moveToLogin przed użyciem
@@ -193,6 +190,5 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
     public void onClick(View v) {
         if (v == signUpButton)
             registerUser();
-        if(v == textViewLogin);
     }
 }

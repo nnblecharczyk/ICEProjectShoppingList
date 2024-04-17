@@ -74,7 +74,7 @@
         android:id="@+id/birthdateButton"
         style="?android:spinnerStyle"
         android:layout_width="210dp"
-        android:layout_height="46dp"
+        android:layout_height="48dp"
         android:layout_marginStart="100dp"
         android:layout_marginTop="464dp"
         android:hint="Birthdate"
@@ -140,14 +140,6 @@
         android:background="#00FFFFFF"
         android:text="Already a user? Log In"
         android:textColor="#757373"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
