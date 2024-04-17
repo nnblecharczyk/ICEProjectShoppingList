@@ -58,39 +58,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/phoneNumberEdit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="404dp"
-        android:ems="10"
-        android:hint="Phone number"
-        android:inputType="phone"
-        android:minHeight="48dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/birthdateButton"
-        style="?android:spinnerStyle"
-        android:layout_width="210dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="464dp"
-        android:hint="Birthdate"
-        android:onClick="openDatePicker"
-        android:textAlignment="textStart"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
         android:id="@+id/passwordEdit1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="524dp"
+        android:layout_marginTop="420dp"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
@@ -103,7 +75,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="580dp"
+        android:layout_marginTop="476dp"
         android:ems="10"
         android:hint="Repeat password"
         android:inputType="textPassword"
@@ -115,9 +87,21 @@
         android:id="@+id/signUpButton"
         android:layout_width="144dp"
         android:layout_height="48dp"
-        android:layout_marginStart="128dp"
-        android:layout_marginTop="632dp"
+        android:layout_marginStart="124dp"
+        android:layout_marginTop="572dp"
         android:text="SIGN UP"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/goToLogInButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="104dp"
+        android:layout_marginTop="620dp"
+        android:background="#00FFFFFF"
+        android:text="Already a user? Log In"
+        android:textColor="#757373"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -128,18 +112,6 @@
         android:layout_marginStart="140dp"
         android:layout_marginTop="176dp"
         android:text="SIGN UP"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/goToLogInButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="108dp"
-        android:layout_marginTop="680dp"
-        android:background="#00FFFFFF"
-        android:text="Already a user? Log In"
-        android:textColor="#757373"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
