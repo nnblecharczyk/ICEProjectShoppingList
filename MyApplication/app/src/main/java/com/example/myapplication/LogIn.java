@@ -29,6 +29,7 @@ import java.util.Map;
 public class LogIn extends AppCompatActivity {
     private Button moveToSignUp, loginButton;
     private EditText emailEditText, passwordEditText;
+    private static String loggedInUserId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +63,7 @@ public class LogIn extends AppCompatActivity {
             return insets;
         });
     }
+
     private void loginUser() {
         final String email = emailEditText.getText().toString();
         final String password = passwordEditText.getText().toString();
@@ -75,7 +77,7 @@ public class LogIn extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(response);
                             boolean error = jsonObject.getBoolean("error");
                             if (!error) {
-                                String userId = jsonObject.getString("userid");
+                                loggedInUserId = jsonObject.getString("userid"); // Zapisujemy zalogowane ID użytkownika
                                 String userEmail = jsonObject.getString("email");
                                 Toast.makeText(getApplicationContext(), "Login successful!", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(LogIn.this, Dashboard.class);
@@ -109,5 +111,10 @@ public class LogIn extends AppCompatActivity {
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
+    }
+
+    // Metoda statyczna, aby uzyskać dostęp do zalogowanego ID użytkownika z innych klas
+    public static String getLoggedInUserId() {
+        return loggedInUserId;
     }
 }
