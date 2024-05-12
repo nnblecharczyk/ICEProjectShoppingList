@@ -195,8 +195,8 @@ public class Dashboard extends AppCompatActivity {
         button.setText(listName);
         ConstraintLayout layout = findViewById(R.id.main);
         ConstraintLayout.LayoutParams layoutParams = new ConstraintLayout.LayoutParams(
-                ConstraintLayout.LayoutParams.WRAP_CONTENT,
-                ConstraintLayout.LayoutParams.WRAP_CONTENT
+               350,
+                80
         );
         layoutParams.topToBottom = (lastButtonId == -1) ? R.id.textView4 : lastButtonId;
         layoutParams.leftToLeft = ConstraintLayout.LayoutParams.PARENT_ID;
